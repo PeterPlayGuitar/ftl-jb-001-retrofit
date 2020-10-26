@@ -1,16 +1,9 @@
 package com.a_peter0.retrofit;
 
 import com.a_peter0.retrofit.request.*;
-import com.a_peter0.retrofit.response.CommentResponse;
-import com.a_peter0.retrofit.response.UserResponse;
 import lombok.val;
-import lombok.var;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Application {
 
@@ -56,6 +49,33 @@ public class Application {
         val isSuccessful = api.deleteComment(2).execute().isSuccessful();
         System.out.println(isSuccessful);
         System.out.println();
+        System.out.println();
+
+
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("------------ TASK 004 -------------------------------------");
+        System.out.println("-----------------------------------------------------------");
+        System.out.println();
+
+        System.out.println("------------ GET POST'S COMMENTS ------------");
+        val postsComments = api.getPostComments(2).execute().body();
+        System.out.println(postsComments);
+
+        System.out.println("------------ GET PHOTOS FROM ALBUM ------------");
+        val pics = api.getAlbumPhotos(2).execute().body();
+        System.out.println(pics);
+
+        System.out.println("------------ GET ALBUMS OF USER ------------");
+        val albums = api.getUsersAlbumsById(2).execute().body();
+        System.out.println(albums);
+
+        System.out.println("------------ GET TODOS OF USER ------------");
+        val todos = api.getUsersTodosById(2).execute().body();
+        System.out.println(todos);
+
+        System.out.println("------------ GET POSTS OF USER ------------");
+        val posts = api.getUsersPostsById(2).execute().body();
+        System.out.println(posts);
 
        /*
         System.out.println("------------ GET USERS ------------");
