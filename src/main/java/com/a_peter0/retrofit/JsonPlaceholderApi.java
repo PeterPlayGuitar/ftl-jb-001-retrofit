@@ -1,10 +1,7 @@
 package com.a_peter0.retrofit;
 
 import com.a_peter0.retrofit.request.*;
-import com.a_peter0.retrofit.response.AlbumResponse;
-import com.a_peter0.retrofit.response.CommentResponse;
-import com.a_peter0.retrofit.response.PostResponse;
-import com.a_peter0.retrofit.response.UserResponse;
+import com.a_peter0.retrofit.response.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -26,12 +23,6 @@ public interface JsonPlaceholderApi {
 
     @GET("/posts/{id}")
     Call<PostResponse> postsGetById(@Path("id") Integer id);
-
-    @GET("/posts/{id}/comments")
-    Call<List<CommentResponse>> postComments(@Path("id") Integer id);
-
-    @GET("/users/{id}/albums")
-    Call<List<AlbumResponse>> getUsersAlbumsById(@Path("id") Integer id);
 
     @GET("/albums")
     Call<List<AlbumResponse>> getAlbums();
@@ -77,4 +68,20 @@ public interface JsonPlaceholderApi {
 
     @DELETE("/comments/{id}")
     Call<Void> deleteComment(@Path("id") Integer id);
+
+
+    @GET("/posts/{id}/comments")
+    Call<List<CommentResponse>> getPostComments(@Path("id") Integer id);
+
+    @GET("/albums/{id}/photos")
+    Call<List<PhotoResponse>> getAlbumPhotos(@Path("id") Integer id);
+
+    @GET("/users/{id}/albums")
+    Call<List<AlbumResponse>> getUsersAlbumsById(@Path("id") Integer id);
+
+    @GET("/users/{id}/todos")
+    Call<List<TodoResponse>> getUsersTodosById(@Path("id") Integer id);
+
+    @GET("/users/{id}/posts")
+    Call<List<PostResponse>> getUsersPostsById(@Path("id") Integer id);
 }
