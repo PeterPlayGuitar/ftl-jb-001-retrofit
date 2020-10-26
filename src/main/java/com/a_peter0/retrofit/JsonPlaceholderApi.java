@@ -1,5 +1,7 @@
 package com.a_peter0.retrofit;
 
+import com.a_peter0.retrofit.request.AlbumCreateRequest;
+import com.a_peter0.retrofit.request.AlbumUpdateRequest;
 import com.a_peter0.retrofit.request.PostCreateRequest;
 import com.a_peter0.retrofit.request.PostUpdateRequest;
 import com.a_peter0.retrofit.response.AlbumResponse;
@@ -35,5 +37,20 @@ public interface JsonPlaceholderApi {
     Call<List<UserResponse>> users();
 
     @GET("/users/{id}/albums")
-    Call<List<AlbumResponse>> albums(@Path("id") Integer id);
+    Call<List<AlbumResponse>> getUsersAlbumsById(@Path("id") Integer id);
+
+    @GET("/albums")
+    Call<List<AlbumResponse>> getAlbums();
+
+    @GET("/albums/{id}")
+    Call<AlbumResponse> getAlbumsById(@Path("id") Integer id);
+
+    @POST("/albums")
+    Call<AlbumResponse> createAlbum(@Body AlbumCreateRequest request);
+
+    @PUT("/albums/{id}")
+    Call<AlbumResponse> updateAlbum(@Path("id") Integer id, @Body AlbumUpdateRequest request);
+
+    @DELETE("/albums/{id}")
+    Call<Void> deleteAlbum(@Path("id") Integer id);
 }
