@@ -1,10 +1,8 @@
 package com.a_peter0.retrofit;
 
-import com.a_peter0.retrofit.request.AlbumCreateRequest;
-import com.a_peter0.retrofit.request.AlbumUpdateRequest;
-import com.a_peter0.retrofit.request.PostCreateRequest;
-import com.a_peter0.retrofit.request.PostUpdateRequest;
+import com.a_peter0.retrofit.request.*;
 import com.a_peter0.retrofit.response.CommentResponse;
+import com.a_peter0.retrofit.response.UserResponse;
 import lombok.val;
 import lombok.var;
 import retrofit2.Call;
@@ -20,6 +18,54 @@ public class Application {
         System.out.println("Start");
         JsonPlaceholderApi api = JsonPlaceholderService.getInstance().getJSONApi();
 
+        System.out.println("------------ GET USERS ------------");
+        val users = api.getUsers().execute().body();
+        System.out.println(users);
+        System.out.println();
+
+        System.out.println("------------ GET USER BY ID ------------");
+        val userById = api.getUserById(2).execute().body();
+        System.out.println(userById);
+        System.out.println();
+
+        System.out.println("------------ CREATE USER ------------");
+        UserResponse createdUser = api.createUser(
+                UserCreateRequest.builder()
+                        .email("peepeepoopoo@yande.ru")
+                        .name("Peter")
+                        .username("Zelinskiy")
+                        .address(new UserCreateRequest.Address("Pushkina", "Volga", "Volgograd", "103843",
+                                new UserCreateRequest.Geo("24356349", "397429")))
+                        .company(new UserCreateRequest.Company("PeepeePoopoo", "We can do it", "bs001"))
+                        .phone("+783473984723")
+                        .website("peepeepoopoo.ru")
+                        .build()
+        ).execute().body();
+        System.out.println(createdUser);
+        System.out.println();
+
+        System.out.println("------------ UPDATE USER ------------");
+        val updatedUser = api.updateUser(1,
+                UserUpdateRequest.builder()
+                        .email("1111WOWnice@yande.ru")
+                        .name("Vasya")
+                        .username("DZelinskiy")
+                        .address(new UserUpdateRequest.Address("111Pushkina", "11Volga", "11Volgograd", "6666666",
+                                new UserUpdateRequest.Geo("24356349", "397429")))
+                        .company(new UserUpdateRequest.Company("WOWnice", "We can do it, maybe", "sb111"))
+                        .phone("+1234566788")
+                        .website("WOWnice.ru")
+                        .build()
+        ).execute().body();
+        System.out.println(updatedUser);
+        System.out.println();
+
+        System.out.println("------------ DELETE ALBUM ------------");
+        val isSuccessful = api.deleteUser(2).execute().isSuccessful();
+        System.out.println(isSuccessful);
+        System.out.println();
+
+        /*
         System.out.println("------------ GET ALBUMS ------------");
         val albums = api.getAlbums().execute().body();
         System.out.println(albums);
@@ -49,10 +95,11 @@ public class Application {
         System.out.println(updatedAlbum);
         System.out.println();
 
-        System.out.println("------------ GET ALBUMS BY ID ------------");
+        System.out.println("------------ DELETE ALBUM ------------");
         val isSuccessful = api.deleteAlbum(2).execute().isSuccessful();
         System.out.println(isSuccessful);
         System.out.println();
+        */
 
        /* System.out.println("------------ POSTS ------------");
         val posts = api.postsGet(10).execute().body();
