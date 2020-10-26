@@ -1,5 +1,7 @@
 package com.a_peter0.retrofit;
 
+import com.a_peter0.retrofit.request.AlbumCreateRequest;
+import com.a_peter0.retrofit.request.AlbumUpdateRequest;
 import com.a_peter0.retrofit.request.PostCreateRequest;
 import com.a_peter0.retrofit.request.PostUpdateRequest;
 import com.a_peter0.retrofit.response.CommentResponse;
@@ -18,7 +20,41 @@ public class Application {
         System.out.println("Start");
         JsonPlaceholderApi api = JsonPlaceholderService.getInstance().getJSONApi();
 
-        System.out.println("------------ POSTS ------------");
+        System.out.println("------------ GET ALBUMS ------------");
+        val albums = api.getAlbums().execute().body();
+        System.out.println(albums);
+        System.out.println();
+
+        System.out.println("------------ GET ALBUMS BY ID ------------");
+        val albumById = api.getAlbumsById(2).execute().body();
+        System.out.println(albumById);
+        System.out.println();
+
+        System.out.println("------------ CREATE ALBUM ------------");
+        val createdAlbum = api.createAlbum(
+                AlbumCreateRequest.builder()
+                        .title("Summer")
+                        .userId(5)
+                        .build()).execute().body();
+        System.out.println(createdAlbum);
+        System.out.println();
+
+        System.out.println("------------ UPDATE ALBUM ------------");
+        val updatedAlbum = api.updateAlbum(1,
+                AlbumUpdateRequest.builder()
+                        .title("Summer")
+                        .id(3000)
+                        .userId(5)
+                        .build()).execute().body();
+        System.out.println(updatedAlbum);
+        System.out.println();
+
+        System.out.println("------------ GET ALBUMS BY ID ------------");
+        val isSuccessful = api.deleteAlbum(2).execute().isSuccessful();
+        System.out.println(isSuccessful);
+        System.out.println();
+
+       /* System.out.println("------------ POSTS ------------");
         val posts = api.postsGet(10).execute().body();
         System.out.println(posts);
 
@@ -57,7 +93,7 @@ public class Application {
             System.out.println(user.getAddress().getCity());
 
         System.out.println("------------ ALBUMS ------------");
-        val albums = api.albums(2).execute().body();
+        val albums = api.getAlbumsById(2).execute().body();
         System.out.println(albums);
 
         Call<List<CommentResponse>> commentsCall = api.postComments(1);
@@ -84,6 +120,6 @@ public class Application {
             public void onFailure(Call<List<CommentResponse>> call, Throwable throwable) {
                 throwable.printStackTrace();
             }
-        });
+        });*/
     }
 }
