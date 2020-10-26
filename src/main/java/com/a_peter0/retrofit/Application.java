@@ -24,7 +24,7 @@ public class Application {
         System.out.println();
 
         System.out.println("------------ GET COMMENT BY ID ------------");
-        val commentById = api.getCommentById(2).execute().body();
+        val commentById = api.getCommentById(2).execute().body(); 
         System.out.println(commentById);
         System.out.println();
 
