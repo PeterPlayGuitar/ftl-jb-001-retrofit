@@ -18,6 +18,46 @@ public class Application {
         System.out.println("Start");
         JsonPlaceholderApi api = JsonPlaceholderService.getInstance().getJSONApi();
 
+        System.out.println("------------ GET COMMENTS ------------");
+        val comments = api.getComments().execute().body();
+        System.out.println(comments);
+        System.out.println();
+
+        System.out.println("------------ GET COMMENT BY ID ------------");
+        val commentById = api.getCommentById(2).execute().body();
+        System.out.println(commentById);
+        System.out.println();
+
+        System.out.println("------------ CREATE COMMENT ------------");
+        val createdComment = api.createComment(
+                CommentCreateRequest.builder()
+                        .body("Вау круто!")
+                        .email("peepeepoopoo@gmail.com")
+                        .name("Peter")
+                        .postId(4)
+                        .build()
+        ).execute().body();
+        System.out.println(createdComment);
+        System.out.println();
+
+        System.out.println("------------ UPDATE COMMENT ------------");
+        val updatedComment = api.updateComment(2,
+                CommentUpdateRequest.builder()
+                        .body("хватит лайкать)")
+                        .email("1123peepeepoopoo@gmail.com")
+                        .name("PeterWow")
+                        .postId(3)
+                        .build()
+        ).execute().body();
+        System.out.println(updatedComment);
+        System.out.println();
+
+        System.out.println("------------ DELETE COMMENT ------------");
+        val isSuccessful = api.deleteComment(2).execute().isSuccessful();
+        System.out.println(isSuccessful);
+        System.out.println();
+
+       /*
         System.out.println("------------ GET USERS ------------");
         val users = api.getUsers().execute().body();
         System.out.println(users);
@@ -60,10 +100,11 @@ public class Application {
         System.out.println(updatedUser);
         System.out.println();
 
-        System.out.println("------------ DELETE ALBUM ------------");
+        System.out.println("------------ DELETE USER ------------");
         val isSuccessful = api.deleteUser(2).execute().isSuccessful();
         System.out.println(isSuccessful);
         System.out.println();
+        */
 
         /*
         System.out.println("------------ GET ALBUMS ------------");
